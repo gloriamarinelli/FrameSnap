@@ -34,7 +34,7 @@ curr = mydb.cursor()
 
 @app.route('/')
 def fetch():
-    return jsonify({"message":"The server is working! :)", "status":200})
+    return jsonify({"message":"The server is working", "status":200})
 
 
 ############################ ACCOUNT MANAGEMENT APIs #####################################
@@ -71,7 +71,7 @@ def login():
     
     for elem in result:
         if elem[2] == password:
-            return jsonify({'message':'Login successfully performed!', 'username':elem[0], 'status':200})
+            return jsonify({'message':'Login successfully!', 'username':elem[0], 'status':200})
         elif elem[2] != password:
             return jsonify({'message':'ERROR: Wrong username and/or password.', 'username':None, 'status':400})
     
@@ -103,7 +103,7 @@ def update_account():
                 mydb.commit()
             except Exception as err:
                 print('[ERROR] There was an error while modifying the account: '+str(err))
-                return jsonify({'message':'ERROR: Modify operation was not successfully performed.', 'status':500})
+                return jsonify({'message':'ERROR: Account modification failed.', 'status':500})
             
         if password != "":
             query = 'UPDATE Person SET password = %s WHERE username = %s;'
@@ -113,7 +113,7 @@ def update_account():
                 mydb.commit()
             except Exception as err:
                 print('[ERROR] There was an error while modifying the account: '+str(err))
-                return jsonify({'message':'ERROR: Modify operation was not successfully performed.', 'status':500})
+                return jsonify({'message':'ERROR: Account modification failed.', 'status':500})
             
         if profile_image is not None:
             query = 'UPDATE Person SET profile_image = %s WHERE username = %s;'
@@ -123,7 +123,7 @@ def update_account():
                 mydb.commit()
             except Exception as err:
                 print('[ERROR] There was an error while modifying the account: '+str(err))
-                return jsonify({'message':'ERROR: Modify operation was not successfully performed.', 'status':500})
+                return jsonify({'message':'ERROR: Account modification failed.', 'status':500})
             
         if username != "":
             query = 'UPDATE Person SET username = %s WHERE username = %s;'
@@ -133,11 +133,11 @@ def update_account():
                 mydb.commit()
             except Exception as err:
                 print('[ERROR] There was an error while modifying the account: '+str(err))
-                return jsonify({'message':'ERROR: Modify operation was not successfully performed.', 'status':500})
+                return jsonify({'message':'ERROR: Account modification failed.', 'status':500})
         
-        return jsonify({"message":"Your data has been modified successfully!", "status":200})
+        return jsonify({"message":"Account modification successful!", "status":200})
     
-    return jsonify({'message':'ERROR: Modify operation was not successfully performed.', 'status':500})
+    return jsonify({'message':'ERROR: Account modification failed.', 'status':500})
 
 
 @app.route('/deleteAccount', methods=['POST'])
@@ -362,7 +362,7 @@ def send_friendship_request():
 
     # Register Notification
     query_notification = 'INSERT INTO Notification (type, text, username_from, username_to) VALUES (%s, %s, %s, %s);'
-    values_notification = ('friendship_request', f'{username_from} wants to be your friend :D', username_from, username_to,)
+    values_notification = ('friendship_request', f'{username_from} sent you a friend request', username_from, username_to,)
 
     try:
         curr.execute(query_notification, values_notification)
