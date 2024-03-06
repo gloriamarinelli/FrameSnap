@@ -6,26 +6,26 @@ print('\n[INFO] Resetting database...\n')
 # Creation of the database
 mydb = mysql.connector.connect(
     host='localhost',
-    user='root',
-    password='root'
+    user='root1',
+    password='root1'
 )
 cursor = mydb.cursor()
 try:
-    cursor.execute('DROP DATABASE IF EXISTS styleup;')
-    cursor.execute('CREATE DATABASE IF NOT EXISTS styleup;')
+    cursor.execute('DROP DATABASE IF EXISTS framesnap;')
+    cursor.execute('CREATE DATABASE IF NOT EXISTS framesnap;')
     mydb.commit()
-    print('[INFO] Database \'styleup\' successfully created.')
+    print('[INFO] Database \'framesnap\' successfully created.')
 except Exception as err:
-    print('[ERROR] Something went wrong during the creation of the database \'styleup\': '+str(err))
+    print('[ERROR] Something went wrong during the creation of the database \'framesnap\': '+str(err))
 mydb.close()
 
 
 # Creation of the tables, after having created the database
 mydb = mysql.connector.connect(
     host='localhost',
-    user='root',
-    password='root',
-    database='styleup'
+    user='root1',
+    password='root1',
+    database='framesnap'
 )
 mycursor = mydb.cursor()
 

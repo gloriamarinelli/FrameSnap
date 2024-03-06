@@ -25,9 +25,9 @@ def before_request():
 # DB setup
 mydb = mysql.connector.connect(
     host='localhost',
-    user='root',
-    password='root',
-    database='styleup'
+    user='root1',
+    password='root1',
+    database='framesnap'
 )
 curr = mydb.cursor()
 
