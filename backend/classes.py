@@ -1,5 +1,5 @@
-class ShirtsBackend:
-    def __init__(self, id: int, shirt: str, shirt_name: str):
+class PaintBackend:
+    def __init__(self, id: int, paint: str, paint_name: str):
         self.id = id
-        self.shirt = shirt
-        self.shirt_name = shirt_name
+        self.paint = paint
+        self.paint_name = paint_name

@@ -50,22 +50,22 @@ except Exception as err:
     print('[ERROR] Something went wrong during the creation of the table \'Person\': '+str(err))
 
 
-# Shirt table
-shirt_drop = 'DROP TABLE IF EXISTS Shirt;'
-shirt_table = '''
-CREATE TABLE IF NOT EXISTS Shirt (
+# Paint table
+paint_drop = 'DROP TABLE IF EXISTS Paint;'
+paint_table = '''
+CREATE TABLE IF NOT EXISTS Paint (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    shirt LONGBLOB NOT NULL,
-    shirt_name VARCHAR(100)
+    paint LONGBLOB NOT NULL,
+    paint_name VARCHAR(100)
 );
 '''
 try:
-    mycursor.execute(shirt_drop)
-    mycursor.execute(shirt_table)
+    mycursor.execute(paint_drop)
+    mycursor.execute(paint_table)
     mydb.commit()
-    print('[INFO] Table \'Shirt\' successfully created.')
+    print('[INFO] Table \'Paint\' successfully created.')
 except Exception as err:
-    print('[ERROR] Something went wrong during the creation of the table \'Shirt\': '+str(err))
+    print('[ERROR] Something went wrong during the creation of the table \'Paint\': '+str(err))
 
 
 # Notification table
@@ -193,12 +193,12 @@ for image in image_paths:
         images.append(image_file.read())
 
 for image in images:
-    query = 'INSERT INTO Shirt (shirt, shirt_name) VALUES (%s, %s);'
+    query = 'INSERT INTO Paint (paint, paint_name) VALUES (%s, %s);'
     values = (image, image_names[i])
     try:
         mycursor.execute(query, values)
         mydb.commit()
-        print(f'[INFO] Shirt {image_names[i]} successfully uploaded!')
+        print(f'[INFO] Paint {image_names[i]} successfully uploaded!')
     except Exception as err:
         print(f'[ERROR] Something went wrong during the upload of the image {image_names[i]}: '+str(err))
     i+=1

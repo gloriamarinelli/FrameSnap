@@ -23,14 +23,14 @@ except Exception as err:
     print('[ERROR] Something went wrong during the reset of the table \'Person\': '+str(err))
 
 
-# Shirt table
-query_delete = 'DELETE FROM Shirt;'
+# Paint table
+query_delete = 'DELETE FROM Paint;'
 try:
     mycursor.execute(query_delete)
     mydb.commit()
-    print('[INFO] Table \'Shirt\' successfully reset.')
+    print('[INFO] Table \'Paint\' successfully reset.')
 except Exception as err:
-    print('[ERROR] Something went wrong during the reset of the table \'Shirt\': '+str(err))
+    print('[ERROR] Something went wrong during the reset of the table \'Paint\': '+str(err))
 
 
 # Notification table
@@ -89,12 +89,12 @@ for image in image_paths:
         images.append(image_file.read())
 
 for image in images:
-    query = 'INSERT INTO Shirt (shirt, shirt_name) VALUES (%s, %s);'
+    query = 'INSERT INTO Paint (paint, paint_name) VALUES (%s, %s);'
     values = (image, image_names[i])
     try:
         mycursor.execute(query, values)
         mydb.commit()
-        print(f'[INFO] Shirt {image_names[i]} successfully uploaded!')
+        print(f'[INFO] Paint {image_names[i]} successfully uploaded!')
     except Exception as err:
         print(f'[ERROR] Something went wrong during the upload of the image {image_names[i]}: '+str(err))
     i+=1

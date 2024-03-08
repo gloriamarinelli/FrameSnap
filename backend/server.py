@@ -3,8 +3,8 @@ import base64
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from datetime import datetime
-from utilities import get_timestamp, serialize_shirts
-from classes import ShirtsBackend
+from utilities import get_timestamp, serialize_paints
+from classes import PaintBackend
 
 app = Flask(__name__)
 CORS(app)
@@ -175,36 +175,36 @@ def get_profile_picture():
 
 
 ########################## PICTURES & POSTS MANAGEMENT APIs ##############################
-@app.route('/getShirts', methods=['GET'])
-def get_shirts():
-    shirts = []
+@app.route('/getPaints', methods=['GET'])
+def get_paint():
+    paints = []
 
-    query = 'SELECT id, shirt, shirt_name FROM Shirt;'
+    query = 'SELECT id, paint, paint_name FROM Paint;'
     curr.execute(query)
     result = curr.fetchall()
 
     for elem in result:
-        shirt = {'id':elem[0], 'shirt':base64.b64encode(elem[1]).decode('utf-8'), 'shirtName':elem[2]}
-        shirts.append(shirt)
+        paint = {'id':elem[0], 'paint':base64.b64encode(elem[1]).decode('utf-8'), 'paintName':elem[2]}
+        paints.append(paint)
     
-    return jsonify({'shirts':shirts, 'status':200})
+    return jsonify({'paints':paints, 'status':200})
 
 
-@app.route('/getShirtById', methods=['GET'])
-def get_shirt_by_id():
-    shirt_id = request.args.get('id')
+@app.route('/getPaintById', methods=['GET'])
+def get_paint_by_id():
+    paint_id = request.args.get('id')
 
-    query = 'SELECT shirt FROM Shirt WHERE id = %s;'
-    values = (shirt_id,)
+    query = 'SELECT paint FROM Paint WHERE id = %s;'
+    values = (paint_id,)
 
     curr.execute(query, values)
     result = curr.fetchall()
 
     for elem in result:
         encoded_data = base64.b64encode(elem[0]).decode('utf-8')
-        return jsonify({'shirt':encoded_data, 'status':200})
+        return jsonify({'paint':encoded_data, 'status':200})
     
-    return jsonify({'shirt':None, 'status':404})
+    return jsonify({'paint':None, 'status':404})
 
 
 @app.route('/createPost', methods=['POST'])
