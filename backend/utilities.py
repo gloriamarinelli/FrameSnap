@@ -8,5 +8,6 @@ def serialize_paints(paints_list):
     return json.dumps([{
         'id': paint.id,
         'paint': paint.paint,
-        'paint_name': paint.paint_name
+        'paint_name': paint.paint_name,
+        'paint_year': paint.paint_year
     } for paint in paints_list])

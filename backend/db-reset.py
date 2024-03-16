@@ -56,7 +56,8 @@ paint_table = '''
 CREATE TABLE IF NOT EXISTS Paint (
     id INT AUTO_INCREMENT PRIMARY KEY,
     paint LONGBLOB NOT NULL,
-    paint_name VARCHAR(100)
+    paint_name VARCHAR(100),
+    paint_year VARCHAR(4)
 );
 '''
 try:
@@ -193,8 +194,8 @@ for image in image_paths:
         images.append(image_file.read())
 
 for image in images:
-    query = 'INSERT INTO Paint (paint, paint_name) VALUES (%s, %s);'
-    values = (image, image_names[i])
+    query = 'INSERT INTO Paint (paint, paint_name, paint_year) VALUES (%s, %s, %s);'
+    values = (image, image_names[i], "1800")
     try:
         mycursor.execute(query, values)
         mydb.commit()

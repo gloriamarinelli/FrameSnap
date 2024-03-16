@@ -89,8 +89,8 @@ for image in image_paths:
         images.append(image_file.read())
 
 for image in images:
-    query = 'INSERT INTO Paint (paint, paint_name) VALUES (%s, %s);'
-    values = (image, image_names[i])
+    query = 'INSERT INTO Paint (paint, paint_name, paint_year) VALUES (%s, %s, %s);'
+    values = (image, image_names[i], "1800")
     try:
         mycursor.execute(query, values)
         mydb.commit()

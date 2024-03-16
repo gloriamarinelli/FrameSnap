@@ -179,12 +179,12 @@ def get_profile_picture():
 def get_paint():
     paints = []
 
-    query = 'SELECT id, paint, paint_name FROM Paint;'
+    query = 'SELECT id, paint, paint_name, paint_year FROM Paint;'
     curr.execute(query)
     result = curr.fetchall()
 
     for elem in result:
-        paint = {'id':elem[0], 'paint':base64.b64encode(elem[1]).decode('utf-8'), 'paintName':elem[2]}
+        paint = {'id':elem[0], 'paint':base64.b64encode(elem[1]).decode('utf-8'), 'paintName':elem[2], 'paintYear':elem[3]}
         paints.append(paint)
     
     return jsonify({'paints':paints, 'status':200})
